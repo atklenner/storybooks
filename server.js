@@ -1,8 +1,10 @@
 require("dotenv").config();
 const express = require("express");
+const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const app = express();
+const expressLayouts = require("express-ejs-layouts");
+const indexRouter = require("./routes/index");
 
 // Load database
 mongoose.connect(process.env.DB_STRING, (err) => {
@@ -19,7 +21,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Set EJS as view engine
+app.use(expressLayouts);
+app.set("layout", "./layouts/index");
 app.set("view engine", "ejs");
+
+// Set routes
+app.use("/", indexRouter);
 
 // Start sever
 app.listen(process.env.PORT, () => {
