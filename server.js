@@ -12,6 +12,8 @@ mongoose.connect(process.env.DB_STRING, (err) => {
   console.log("connected to DB");
 });
 
+app.use(morgan("tiny"));
+
 app.listen(process.env.PORT, () => {
   console.log(
     `It's runnin' in ${process.env.NODE_ENV} mode on port ${process.env.PORT}`
