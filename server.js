@@ -19,10 +19,12 @@ mongoose.connect(process.env.DB_STRING, (err) => {
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("tiny"));
 }
+// Static folder
+app.use(express.static("public"));
 
 // Set EJS as view engine
 app.use(expressLayouts);
-app.set("layout", "./layouts/index");
+app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
 
 // Set routes
