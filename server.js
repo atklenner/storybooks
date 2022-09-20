@@ -12,7 +12,9 @@ mongoose.connect(process.env.DB_STRING, (err) => {
   console.log("connected to DB");
 });
 
-app.use(morgan("tiny"));
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("tiny"));
+}
 
 app.listen(process.env.PORT, () => {
   console.log(
