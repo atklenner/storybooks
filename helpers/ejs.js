@@ -1,4 +1,14 @@
 module.exports = {
+  formatDate: function (str) {
+    return str.toLocaleString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    });
+  },
   truncate: function (str, len) {
     if (str.length > len && str.length > 0) {
       let newStr = str.substr(0, len);
