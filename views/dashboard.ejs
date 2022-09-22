@@ -18,7 +18,17 @@
                         <td><a href=<%= `/stories/${stories[i]._id}` %>><%= stories[i].title %></a></td>
                         <td><%= stories[i].createdAt.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric", hour: "numeric", minute: "numeric", second: "numeric" }) %></td>
                         <td><span class="dash-status"><%= stories[i].status %></span></td>
-                        <td></td>
+                        <td>
+                            <a href=<%= `/stories/edit/${stories[i]._id}` %> class="btn btn-float">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action=<%= `/stories/${stories[i]._id}` %> method="POST" id="delete-form">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn red">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 </tr>
             <% } %>

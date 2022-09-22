@@ -58,7 +58,7 @@ router.get("/edit/:id", ensureAuth, async (req, res) => {
   }
 });
 
-//
+// Update story
 // PUT /stories/:id
 router.put("/:id", ensureAuth, async (req, res) => {
   try {
@@ -77,6 +77,18 @@ router.put("/:id", ensureAuth, async (req, res) => {
       });
       res.redirect("/dashboard");
     }
+  } catch (error) {
+    console.error(error);
+    res.render("error/500");
+  }
+});
+
+// Delete story
+// DELETE /stories/:id
+router.delete("/:id", ensureAuth, async (req, res) => {
+  try {
+    await Story.findByIdAndRemove(req.params.id);
+    res.redirect("/dashboard");
   } catch (error) {
     console.error(error);
     res.render("error/500");
