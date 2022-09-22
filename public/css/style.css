@@ -1,9 +1,13 @@
 p {
-    margin: 10px 0 !important;
+    margin: 0.75rem 0 !important;
 }
 
 .login-container {
-    width: 400px;
-    margin-top: 50px;
+    width: 26rem;
+    margin-top: 3.25rem;
     text-align: center;
+}
+
+.fa-small {
+    font-size: 1.25rem !important;
 }
