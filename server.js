@@ -7,6 +7,7 @@ const expressLayouts = require("express-ejs-layouts");
 const passport = require("passport");
 const session = require("express-session");
 const indexRouter = require("./routes/index");
+const authRouter = require("./routes/auth");
 
 // Passport
 require("./config/passport")(passport);
@@ -24,6 +25,7 @@ mongoose.connect(process.env.DB_STRING, (err) => {
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("tiny"));
 }
+
 // Static folder
 app.use(express.static("public"));
 
@@ -47,6 +49,7 @@ app.use(passport.session());
 
 // Set routes
 app.use("/", indexRouter);
+app.use("/auth", authRouter);
 
 // Start sever
 app.listen(process.env.PORT, () => {
