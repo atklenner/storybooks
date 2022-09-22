@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
 const passport = require("passport");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 
@@ -39,7 +40,8 @@ app.use(
   session({
     secret: "really good secret",
     resave: false,
-    saveUnitinialized: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
   })
 );
 
