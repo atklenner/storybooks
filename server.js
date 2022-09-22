@@ -4,7 +4,12 @@ const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
+const passport = require("passport");
+const session = require("express-session");
 const indexRouter = require("./routes/index");
+
+// Passport
+require("./config/passport")(passport);
 
 // Load database
 mongoose.connect(process.env.DB_STRING, (err) => {
@@ -26,6 +31,19 @@ app.use(express.static("public"));
 app.use(expressLayouts);
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
+
+// Express session
+app.use(
+  session({
+    secret: "really good secret",
+    resave: false,
+    saveUnitinialized: false,
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Set routes
 app.use("/", indexRouter);
