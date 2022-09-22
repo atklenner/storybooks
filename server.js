@@ -9,6 +9,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
+const storiesRouter = require("./routes/stories");
 
 // Passport
 require("./config/passport")(passport);
@@ -52,6 +53,7 @@ app.use(passport.session());
 // Set routes
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
+app.use("/stories", storiesRouter);
 
 // Start sever
 app.listen(process.env.PORT, () => {
