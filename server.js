@@ -7,6 +7,7 @@ const expressLayouts = require("express-ejs-layouts");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const helpers = require("./helpers/helpers");
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const storiesRouter = require("./routes/stories");
@@ -34,6 +35,9 @@ app.use(express.static("public"));
 // Body parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Add EJS Helper functions
+helpers(app);
 
 // Set EJS as view engine
 app.use(expressLayouts);
