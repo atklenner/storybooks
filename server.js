@@ -31,6 +31,10 @@ if (process.env.NODE_ENV === "development") {
 // Static folder
 app.use(express.static("public"));
 
+// Body parser
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 // Set EJS as view engine
 app.use(expressLayouts);
 app.set("layout", "./layouts/main");
