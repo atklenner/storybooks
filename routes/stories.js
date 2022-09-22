@@ -52,7 +52,35 @@ router.get("/edit/:id", ensureAuth, async (req, res) => {
     } else {
       res.render("stories/edit", { story });
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    res.render("error/500");
+  }
+});
+
+//
+// PUT /stories/:id
+router.put("/:id", ensureAuth, async (req, res) => {
+  try {
+    const story = await Story.findById(req.params.id).lean();
+
+    if (!story) {
+      return res.render("error/404");
+    }
+
+    if (story.user.toString() != req.user._id.toString()) {
+      res.redirect("/stories");
+    } else {
+      await Story.findOneAndUpdate({ _id: req.params.id }, req.body, {
+        new: true,
+        runValidators: true,
+      });
+      res.redirect("/dashboard");
+    }
+  } catch (error) {
+    console.error(error);
+    res.render("error/500");
+  }
 });
 
 module.exports = router;
