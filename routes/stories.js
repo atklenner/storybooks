@@ -24,6 +24,23 @@ router.get("/", ensureAuth, async (req, res) => {
   }
 });
 
+// Show single story
+// GET /stories/:id
+router.get("/:id", async (req, res) => {
+  try {
+    let story = await Story.findById(req.params.id).populate("user").lean();
+
+    if (!story) {
+      return res.render("error/404");
+    }
+
+    res.render("stories/show", { story, userId: req.user._id });
+  } catch (error) {
+    console.error(error);
+    res.render("error/404");
+  }
+});
+
 // Process add form
 // POST /stories
 router.post("/", ensureAuth, async (req, res) => {
