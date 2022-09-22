@@ -16,7 +16,7 @@
                 <tr>
                     <tr>
                         <td><a href=<%= `/stories/${stories[i]._id}` %>><%= stories[i].title %></a></td>
-                        <td><%= stories[i].createdAt.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric", hour: "numeric", minute: "numeric", second: "numeric" }) %></td>
+                        <td><%= formatDate(stories[i].createdAt) %></td>
                         <td><span class="dash-status"><%= stories[i].status %></span></td>
                         <td>
                             <a href=<%= `/stories/edit/${stories[i]._id}` %> class="btn btn-float">
