@@ -16,7 +16,7 @@
                 <tr>
                     <tr>
                         <td><a href=<%= `/stories/${stories[i]._id}` %>></a><%= stories[i].title %></td>
-                        <td><%= stories[i].createdAt %></td>
+                        <td><%= stories[i].createdAt.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric", hour: "numeric", minute: "numeric", second: "numeric" }) %></td>
                         <td><span class="dash-status"><%= stories[i].status %></span></td>
                         <td></td>
                     </tr>
