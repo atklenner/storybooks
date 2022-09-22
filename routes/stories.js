@@ -17,7 +17,7 @@ router.get("/", ensureAuth, async (req, res) => {
       .populate("user")
       .sort({ createdAt: "desc" })
       .lean();
-    res.render("stories/index", { stories });
+    res.render("stories/index", { stories, userId: req.user._id });
   } catch (error) {
     console.error(error);
     res.render("error/500");
