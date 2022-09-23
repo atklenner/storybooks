@@ -1,6 +1,7 @@
 const express = require("express");
-const passport = require("passport");
 const router = express.Router();
+const passport = require("passport");
+const authController = require("../controllers/authController");
 
 // Auth with Google
 // GET /auth/google
@@ -16,11 +17,6 @@ router.get(
 
 // Logout user
 // GET /auth/logout
-router.get("/logout", (req, res) => {
-  req.logout((error) => {
-    if (error) return next(error);
-    res.redirect("/");
-  });
-});
+router.get("/logout", authController.logout);
 
 module.exports = router;
