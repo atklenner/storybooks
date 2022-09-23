@@ -6,7 +6,7 @@ module.exports = {
   },
   dashboardPage: async (req, res) => {
     try {
-      const stories = await Story.find({ _id: req.user.id }).lean();
+      const stories = await Story.find({ user: req.user._id }).lean();
       res.render("dashboard", { name: req.user.firstName, stories });
     } catch (error) {
       console.error(error);
